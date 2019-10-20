@@ -1,5 +1,6 @@
 package opentech.coffeeShop.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("product")
 public class ProductController implements ControllerCrud {
 
-
+    @GetMapping
     public Object create(Object object) {
-        return null;
+        return "it's worked";
     }
 
     public Object getAll() {
