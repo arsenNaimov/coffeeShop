@@ -7,7 +7,7 @@ public interface ControllerCrud {
     Object getAll();
     Object getOne(Long id);
     //update
-    Object update (Object object);
+    Object update(Object object);
     //delete
     void delete(Object object);
 }

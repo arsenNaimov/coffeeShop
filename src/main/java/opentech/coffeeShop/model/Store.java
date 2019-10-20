@@ -3,15 +3,13 @@ package opentech.coffeeShop.model;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity
 @Table(name = "STORE")
 public class Store {
     @Id
     Long id;
     @Column(name = "NAME")
     String name;
-    @Column(name = "WORKERS")
-    List<String> workers;
     @Column(name = "ADDRESS")
     String address;
     @OneToMany(mappedBy = "stores")
@@ -33,13 +31,7 @@ public class Store {
         this.name = name;
     }
 
-    public List<String> getWorkers() {
-        return workers;
-    }
 
-    public void setWorkers(List<String> workers) {
-        this.workers = workers;
-    }
 
     public String getAddress() {
         return address;
@@ -62,7 +54,6 @@ public class Store {
         return "Store{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", workers=" + workers +
                 ", address='" + address + '\'' +
                 ", products=" + products +
                 '}';

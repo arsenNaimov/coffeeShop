@@ -1,32 +1,51 @@
 package opentech.coffeeShop.service;
+
+import opentech.coffeeShop.dao.ProductDAO;
+import opentech.coffeeShop.dao.util.SessionUtil;
+import opentech.coffeeShop.model.Product;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.List;
+
 @Service
-public class ProductService implements ServiceCrud{
-
-
+public class ProductService extends SessionUtil implements ProductDAO {
 
     @Override
-    public Object create(Object object) {
-        return null;
+    public void add(Product product) throws SQLException {
+        openTransactionSession();
+        getSession().save(product);
+        closeTransactionSession();
     }
 
     @Override
-    public Object getAll() {
-        return null;
+    public List<Product> getAll() throws SQLException {
+        openTransactionSession();
+        List <Product> products = getSession().createNativeQuery("SELECT * FROM PRODUCT").addEntity(Product.class).list();
+        closeTransactionSession();
+        return products;
     }
 
     @Override
-    public Object getOne(Long id) {
-        return null;
+    public Product getById(Long id) throws SQLException {
+        openTransactionSession();
+        Product product = (Product) getSession().createNativeQuery("SELECT * FROM PRODUCT WHERE ID = :id")
+                .addEntity(Product.class).setParameter("id", id).getSingleResult();
+        closeTransactionSession();
+        return product;
     }
 
     @Override
-    public Object update(Object object) {
-        return null;
+    public void update(Product product) throws SQLException {
+        openTransactionSession();
+        getSession().update(product);
+        closeTransactionSession();
     }
 
     @Override
-    public void delete(Object object) {
-
+    public void delete(Product product) throws SQLException {
+        openTransactionSession();
+        getSession().remove(product);
+        closeTransactionSession();
     }
 }
