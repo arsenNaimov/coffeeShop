@@ -1,5 +1,6 @@
 package opentech.coffeeShop.model;
 
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "NAME")
     private String name;
