@@ -7,6 +7,7 @@ import java.util.List;
 @Table(name = "STORE")
 public class Store {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @Column(name = "NAME")
     String name;
