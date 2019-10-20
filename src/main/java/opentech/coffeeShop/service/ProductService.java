@@ -21,7 +21,7 @@ public class ProductService extends SessionUtil implements ProductDAO {
     @Override
     public List<Product> getAll() throws SQLException {
         openTransactionSession();
-        List <Product> products = getSession().createNativeQuery("SELECT * FROM PRODUCT").addEntity(Product.class).list();
+        List<Product> products = getSession().createNativeQuery("SELECT * FROM PRODUCT").addEntity(Product.class).list();
         closeTransactionSession();
         return products;
     }
