@@ -1,6 +1,6 @@
 package opentech.coffeeShop.controller;
 
-public interface ControllerCrud {
+public interface BaseController {
     //create
     Object create(Object object);
     //read

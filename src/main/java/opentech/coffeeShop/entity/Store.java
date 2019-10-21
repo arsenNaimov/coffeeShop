@@ -1,4 +1,4 @@
-package opentech.coffeeShop.model;
+package opentech.coffeeShop.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Store {
     String name;
     @Column(name = "ADDRESS")
     String address;
-    @OneToMany(mappedBy = "stores")
+    @ManyToMany(mappedBy = "storeEntities")
     List<Product> products;
 
     public Long getId() {

@@ -1,16 +1,15 @@
 package opentech.coffeeShop.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("product")
-public class ProductController implements ControllerCrud {
+public class ProductBaseController implements BaseController {
 
-    @GetMapping
+
+    @Override
     public Object create(Object object) {
-        return "it's worked";
+        return null;
     }
 
     public Object getAll() {

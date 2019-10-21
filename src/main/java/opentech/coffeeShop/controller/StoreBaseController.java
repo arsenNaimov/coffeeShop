@@ -1,6 +1,6 @@
 package opentech.coffeeShop.controller;
 
-public class StoreController implements ControllerCrud {
+public class StoreBaseController implements BaseController {
 
 
     public Object create(Object object) {

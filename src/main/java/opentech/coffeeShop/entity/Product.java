@@ -1,6 +1,4 @@
-package opentech.coffeeShop.model;
-
-
+package opentech.coffeeShop.entity;
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "store_id", referencedColumnName = "id")
     )
-    private List<Store> stores;
+    private List<Store> storeEntities;
 
     public Long getId() {
         return id;
