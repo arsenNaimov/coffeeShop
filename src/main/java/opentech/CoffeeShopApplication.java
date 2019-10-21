@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ComponentScan("opentech.coffeeShop.repository") //to scan packages mentioned
 @EntityScan("opentech.coffeeShop.entity")
-@EnableJpaRepositories("opentech.coffeeShop.repository") //to activate MongoDB repositories
+//@EnableJpaRepositories("opentech.coffeeShop.repository") //to activate MongoDB repositories
 public class CoffeeShopApplication {
 
 	public static void main(String[] args) {
