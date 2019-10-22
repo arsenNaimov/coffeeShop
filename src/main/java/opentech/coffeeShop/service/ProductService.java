@@ -1,51 +1,42 @@
 package opentech.coffeeShop.service;
 
-import opentech.coffeeShop.dao.ProductDAO;
-import opentech.coffeeShop.dao.util.SessionUtil;
 import opentech.coffeeShop.model.Product;
+import opentech.coffeeShop.repository.ProductRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class ProductService extends SessionUtil implements ProductDAO {
+public class ProductService{
 
-    @Override
-    public void add(Product product) throws SQLException {
-        openTransactionSession();
-        getSession().save(product);
-        closeTransactionSession();
+
+    private final ProductRepository productRepository;
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    @Override
-    public List<Product> getAll() throws SQLException {
-        openTransactionSession();
-        List<Product> products = getSession().createNativeQuery("SELECT * FROM PRODUCT").addEntity(Product.class).list();
-        closeTransactionSession();
-        return products;
+    public List<Product> getAll(){
+        return productRepository.findAll();
     }
 
-    @Override
-    public Product getById(Long id) throws SQLException {
-        openTransactionSession();
-        Product product = (Product) getSession().createNativeQuery("SELECT * FROM PRODUCT WHERE ID = :id")
-                .addEntity(Product.class).setParameter("id", id).getSingleResult();
-        closeTransactionSession();
-        return product;
+    public Product getById(Long id){
+        return productRepository.getOne(id);
     }
 
-    @Override
-    public void update(Product product) throws SQLException {
-        openTransactionSession();
-        getSession().update(product);
-        closeTransactionSession();
+    public Product add(Product product){
+        return productRepository.save(product);
     }
 
-    @Override
-    public void delete(Product product) throws SQLException {
-        openTransactionSession();
-        getSession().remove(product);
-        closeTransactionSession();
+    public Product update(Product product){
+        Product productFromDb = productRepository.getOne(product.getId());
+        BeanUtils.copyProperties(product, productFromDb, "id");
+        return productRepository.save(productFromDb);
+    }
+
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 }

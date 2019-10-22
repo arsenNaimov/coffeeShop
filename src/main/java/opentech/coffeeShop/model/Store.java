@@ -2,6 +2,7 @@ package opentech.coffeeShop.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "STORE")
@@ -13,7 +14,7 @@ public class Store {
     String name;
     @Column(name = "ADDRESS")
     String address;
-    @OneToMany(mappedBy = "stores")
+    @ManyToMany(mappedBy = "stores")
     List<Product> products;
 
     public Long getId() {
@@ -48,6 +49,22 @@ public class Store {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Store store = (Store) o;
+        return id.equals(store.id) &&
+                name.equals(store.name) &&
+                address.equals(store.address) &&
+                products.equals(store.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address, products);
     }
 
     @Override

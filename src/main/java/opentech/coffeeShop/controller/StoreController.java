@@ -1,25 +1,41 @@
 package opentech.coffeeShop.controller;
 
-public class StoreController implements ControllerCrud {
+import opentech.coffeeShop.model.Store;
+import opentech.coffeeShop.service.StoreService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-    public Object create(Object object) {
-        return null;
+@RestController
+@RequestMapping("store")
+public class StoreController{
+
+    @Autowired
+    StoreService storeService;
+
+    @GetMapping
+    public List<Store> getAll() {
+        return storeService.getAll();
     }
 
-    public Object getAll() {
-        return null;
+    @GetMapping("{id}")
+    public Store getOne(@PathVariable Long id) {
+        return storeService.getById(id);
     }
 
-    public Object getOne(Long id) {
-        return null;
+    @PostMapping
+    public Store create(@RequestBody Store store) {
+        return storeService.add(store);
     }
 
-    public Object update(Object object) {
-        return null;
+    @PutMapping
+    public Store update(@RequestBody Store store) {
+        return storeService.update(store);
     }
 
-    public void delete(Object object) {
-
+    @DeleteMapping
+    public void delete(@RequestBody Store store) {
+        storeService.delete(store);
     }
 }
