@@ -13,7 +13,7 @@ public class Store {
     Long id;
     String name;
     String address;
-    @ManyToMany(mappedBy = "storeEntities")
+    @ManyToMany(mappedBy = "stores")
     List<Product> products;
 
     public Long getId() {
