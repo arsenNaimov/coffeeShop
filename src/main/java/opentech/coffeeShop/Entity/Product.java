@@ -1,23 +1,19 @@
-package opentech.coffeeShop.model;
+package opentech.coffeeShop.Entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PRODUCT")
-public class Product{
+public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private Long weightInGrams;
     private Long quantity;
-    @ManyToMany
-    @JoinTable(name = "product_store",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "store_id", referencedColumnName = "id")
-    )
-    private List<Store> stores;
+
 
     public Long getId() {
         return id;
@@ -51,12 +47,20 @@ public class Product{
         this.quantity = quantity;
     }
 
-    public List<Store> getStores() {
-        return stores;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id.equals(product.id) &&
+                name.equals(product.name) &&
+                weightInGrams.equals(product.weightInGrams) &&
+                quantity.equals(product.quantity);
     }
 
-    public void setStores(List<Store> stores) {
-        this.stores = stores;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, weightInGrams, quantity);
     }
 
     @Override

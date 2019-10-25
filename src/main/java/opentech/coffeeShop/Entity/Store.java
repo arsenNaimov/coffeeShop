@@ -1,9 +1,6 @@
-package opentech.coffeeShop.model;
-
-import opentech.coffeeShop.model.Product;
+package opentech.coffeeShop.Entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "STORE")
@@ -13,8 +10,6 @@ public class Store {
     Long id;
     String name;
     String address;
-    @ManyToMany(mappedBy = "stores")
-    List<Product> products;
 
     public Long getId() {
         return id;
@@ -33,7 +28,6 @@ public class Store {
     }
 
 
-
     public String getAddress() {
         return address;
     }
@@ -42,13 +36,6 @@ public class Store {
         this.address = address;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 
     @Override
     public String toString() {
@@ -56,7 +43,6 @@ public class Store {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", products=" + products +
                 '}';
     }
 }

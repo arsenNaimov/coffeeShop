@@ -1,16 +1,15 @@
-package opentech.coffeeShop.model;
+package opentech.coffeeShop.Entity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="ROLE")
-public class Role{
+@Table(name = "ROLE")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-
 
 
     private Long authoritiesID;

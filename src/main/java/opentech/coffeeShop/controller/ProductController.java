@@ -1,6 +1,6 @@
 package opentech.coffeeShop.controller;
 
-import opentech.coffeeShop.model.Product;
+import opentech.coffeeShop.Entity.Product;
 import opentech.coffeeShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("product")
 public class ProductController {
 
+    private final ProductService productService;
+
     @Autowired
-    ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public List<Product> getAll() {
@@ -21,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public Product getOne(@PathVariable Long id) {
+    public Product getOne(@PathVariable("id") Long id) {
         return productService.getById(id);
     }
 
@@ -35,8 +39,9 @@ public class ProductController {
         return productService.update(product);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody Product product) {
-        productService.delete(product);
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        productService.delete(id);
     }
+
 }
