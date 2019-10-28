@@ -4,17 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 @Data
-@Table(name = "ROLE")
-public class Role {
+class BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "AUTHORITIES_ID")
-    private Long authoritiesID;
 }

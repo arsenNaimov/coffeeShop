@@ -125,6 +125,7 @@ Vue.component('products-list', {
     }
 });
 
+
 var app = new Vue({
     el: '#app',
     template: '<products-list :products="products" />',
