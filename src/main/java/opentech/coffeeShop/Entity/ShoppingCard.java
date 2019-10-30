@@ -1,5 +1,5 @@
 package opentech.coffeeShop.Entity;
 
-public class ShoppingCard {
+public class ShoppingCard extends BaseEntity{
 
 }

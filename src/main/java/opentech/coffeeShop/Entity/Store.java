@@ -3,18 +3,19 @@ package opentech.coffeeShop.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @Table(name = "STORE")
-public class Store {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class Store extends BaseEntity{
 
     @Column(name = "NAME")
-    String name;
+    private String name;
 
     @Column(name = "ADDRESS")
-    String address;
+    private String address;
+
+    @ManyToMany(mappedBy = "stores", fetch = FetchType.EAGER)
+    private List<Product> products;
 }

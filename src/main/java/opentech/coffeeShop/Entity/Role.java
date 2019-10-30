@@ -1,20 +1,24 @@
 package opentech.coffeeShop.Entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "roles")
 @Data
-@Table(name = "ROLE")
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Role extends BaseEntity {
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "AUTHORITIES_ID")
-    private Long authoritiesID;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id: " + super.getId() + ", " +
+                "name: " + name + "}";
+    }
 }

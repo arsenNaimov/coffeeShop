@@ -4,10 +4,8 @@ import opentech.coffeeShop.Entity.DiscountAction;
 import opentech.coffeeShop.service.DiscountActionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-//"currently functional in development"
 @RestController
 @RequestMapping("discountAction")
 public class DiscontActionController {

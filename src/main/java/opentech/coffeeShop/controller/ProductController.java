@@ -4,12 +4,11 @@ import opentech.coffeeShop.Entity.Product;
 import opentech.coffeeShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
 @RestController
-@RequestMapping("product")
+@RequestMapping("/api/products/")
 public class ProductController {
 
     private final ProductService productService;
@@ -18,6 +17,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
 
     @GetMapping
     public List<Product> getAll() {

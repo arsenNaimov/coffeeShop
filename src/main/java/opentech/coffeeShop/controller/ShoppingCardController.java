@@ -4,10 +4,8 @@ import opentech.coffeeShop.Entity.ShoppingCard;
 import opentech.coffeeShop.service.ShoppingCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-//"currently functional in development"
 @RestController
 @RequestMapping("shopCard")
 public class ShoppingCardController {

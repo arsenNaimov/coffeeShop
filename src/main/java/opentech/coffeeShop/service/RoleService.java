@@ -1,48 +1,17 @@
 package opentech.coffeeShop.service;
 
 import opentech.coffeeShop.Entity.Role;
-import opentech.coffeeShop.repository.RoleRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
+public interface RoleService {
+    List<Role> getAll();
 
-@Service
-public class RoleService {
+    Role getById(Long id);
 
-    private final RoleRepository roleRepository;
+    Role add(Role role);
 
-    @Autowired
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    Role update(Role role);
 
-    public List<Role> getAll() {
-        return roleRepository.findAll();
-    }
-
-    public Role getById(Long id) {
-        return roleRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("\n" +
-                        "Role entity not found by id :  " + id));
-    }
-
-    public Role add(Role role) {
-        return roleRepository.save(role);
-    }
-
-    public Role update(Role role) {
-        Role roleFromDb = roleRepository.findById(role.getId())
-                .orElseThrow(() -> new EntityNotFoundException("\n" +
-                        "Role entity not found by id :  " + role.getId()));
-        BeanUtils.copyProperties(role, roleFromDb, "id");
-        return roleRepository.save(roleFromDb);
-    }
-
-    public void delete(Long id) {
-        roleRepository.deleteById(id);
-    }
+    void delete(Long id);
 }

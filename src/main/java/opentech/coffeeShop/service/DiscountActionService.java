@@ -1,34 +1,16 @@
 package opentech.coffeeShop.service;
 
 import opentech.coffeeShop.Entity.DiscountAction;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-//"currently functional in development"
+public interface DiscountActionService {
+    List<DiscountAction> getAll();
 
-@Service
-public class DiscountActionService {
-    public List<DiscountAction> getAll() {
-        return null;
+    DiscountAction getById(Long id);
 
-    }
+    DiscountAction add(DiscountAction discountAction);
 
-    public DiscountAction getById(Long id) {
-        return null;
+    DiscountAction update(DiscountAction discountAction);
 
-    }
-
-    public DiscountAction add(DiscountAction discountAction) {
-        return null;
-
-    }
-
-    public DiscountAction update(DiscountAction discountAction) {
-        return null;
-
-    }
-
-    public void delete(Long id) {
-    }
+    void delete(Long id);
 }

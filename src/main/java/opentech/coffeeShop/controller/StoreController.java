@@ -4,7 +4,6 @@ import opentech.coffeeShop.Entity.Store;
 import opentech.coffeeShop.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

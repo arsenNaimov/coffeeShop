@@ -4,7 +4,6 @@ import opentech.coffeeShop.Entity.Role;
 import opentech.coffeeShop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,6 +16,7 @@ public class RoleController {
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
+
 
     @GetMapping
     public List<Role> getAll() {
