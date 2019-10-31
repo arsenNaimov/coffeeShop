@@ -4,6 +4,7 @@ import opentech.coffeeShop.Entity.ShoppingCard;
 import opentech.coffeeShop.service.ShoppingCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class ShoppingCardController {
         return shoppingCardService.getAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping(value = "{id}")
     public ShoppingCard getOne(@PathVariable("id") Long id) {
         return shoppingCardService.getById(id);
     }
@@ -37,7 +38,7 @@ public class ShoppingCardController {
         return shoppingCardService.update(authorities);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(value = "{id}")
     public void delete(@PathVariable Long id) {
         shoppingCardService.delete(id);
     }

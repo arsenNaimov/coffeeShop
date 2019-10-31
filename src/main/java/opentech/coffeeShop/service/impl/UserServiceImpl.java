@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,27 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(userRoles);
         user.setStatus(Status.ACTIVE);
+        if(userRepository.findByUsername(user.getUsername()) != null){
+            new EntityExistsException("\n" +
+                    "user entity already exists");
+            return null;
+        }
+        return  userRepository.save(user);
+    }
+
+    @Override
+    public User registerAdmin(User user) {
+        Role roleUser = roleRepository.findByName("ROLE_ADMIN");
+        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(roleUser);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(userRoles);
+        user.setStatus(Status.ACTIVE);
+        if(userRepository.findByUsername(user.getUsername()) != null){
+            new EntityExistsException("\n" +
+                    "user entity already exists");
+            return null;
+        }
         return  userRepository.save(user);
     }
 

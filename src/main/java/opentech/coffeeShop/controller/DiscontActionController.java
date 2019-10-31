@@ -4,6 +4,7 @@ import opentech.coffeeShop.Entity.DiscountAction;
 import opentech.coffeeShop.service.DiscountActionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class DiscontActionController {
         return discountActionService.getAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping(value = "{id}")
     public DiscountAction getOne(@PathVariable("id") Long id) {
         return discountActionService.getById(id);
     }
@@ -37,7 +38,7 @@ public class DiscontActionController {
         return discountActionService.update(discountAction);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(value = "{id}")
     public void delete(@PathVariable Long id) {
         discountActionService.delete(id);
     }

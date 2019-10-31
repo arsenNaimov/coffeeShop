@@ -1,13 +1,20 @@
 package opentech.coffeeShop.controller;
 
 import opentech.coffeeShop.Entity.Role;
+import opentech.coffeeShop.Entity.Status;
+import opentech.coffeeShop.dto.RoleDto;
 import opentech.coffeeShop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("role")
+@RequestMapping("/api/admin/role")
 public class RoleController {
 
     private final RoleService roleService;
@@ -17,29 +24,46 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-
     @GetMapping
-    public List<Role> getAll() {
-        return roleService.getAll();
+    public ResponseEntity<List<RoleDto>> getAll() {
+        List<Role> roles = roleService.getAll();
+        if (roles == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        List<RoleDto> result = new ArrayList<>();
+        roles.forEach(role -> result.add(RoleDto.fromRole(role)));
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public Role getOne(@PathVariable("id") Long id) {
-        return roleService.getById(id);
+    @GetMapping(value = "{id}")
+    public ResponseEntity<RoleDto> getOne(@PathVariable("id") Long id) {
+        Role role = roleService.getById(id);
+        if (role == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        RoleDto result = RoleDto.fromRole(role);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping
-    public Role create(@RequestBody Role role) {
-        return roleService.add(role);
+    public ResponseEntity<RoleDto> create(@RequestBody RoleDto roleDto) {
+        Role role = roleDto.toRole();
+        role.setStatus(Status.ACTIVE);
+        role.setCreated(new Date());
+        role.setUpdated(new Date());
+        RoleDto result = RoleDto.fromRole(roleService.add(role));
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping
-    public Role update(@RequestBody Role role) {
-        return roleService.update(role);
+    public ResponseEntity<RoleDto> update(@RequestBody RoleDto roleDto) {
+        Role role = roleDto.toRole();
+        return new ResponseEntity<>(RoleDto.fromRole(roleService.update(role)), HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(value = "{id}")
     public void delete(@PathVariable Long id) {
         roleService.delete(id);
     }
+
 }
