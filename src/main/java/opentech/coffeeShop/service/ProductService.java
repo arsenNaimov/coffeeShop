@@ -1,42 +1,17 @@
 package opentech.coffeeShop.service;
 
-import opentech.coffeeShop.model.Product;
-import opentech.coffeeShop.repository.ProductRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import opentech.coffeeShop.Entity.Product;
 
 import java.util.List;
 
-@Service
-public class ProductService{
+public interface ProductService {
+    List<Product> getAll();
 
+    Product getById(Long id);
 
-    private final ProductRepository productRepository;
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    Product add(Product product);
 
-    public List<Product> getAll(){
-        return productRepository.findAll();
-    }
+    Product update(Product product);
 
-    public Product getById(Long id){
-        return productRepository.getOne(id);
-    }
-
-    public Product add(Product product){
-        return productRepository.save(product);
-    }
-
-    public Product update(Product product){
-        Product productFromDb = productRepository.getOne(product.getId());
-        BeanUtils.copyProperties(product, productFromDb, "id");
-        return productRepository.save(productFromDb);
-    }
-
-    public void delete(Product product) {
-        productRepository.delete(product);
-    }
+    void delete(Long id);
 }
